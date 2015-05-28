@@ -1,0 +1,55 @@
+<div class="row">
+
+	<form ng-submit="createTodo(newTodo)" ng-init="newTodo = {}">
+
+		<div class="form-group col-sm-10">
+			<input type="text" ng-model="newTodo.name" class="form-control" placeholder="New todo">
+		</div>
+
+		<div class="form-group col-sm-2">
+			<input type="submit" class="btn btn-primary btn-block" value="Add todo">
+		</div>
+
+	</form>
+	
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		
+		<h2>Uncompleted tasks</h2>
+
+		<div class="todo panel panel-default" ng-repeat="todo in todos | filter:{completed:false}">
+      <div class="panel-body">
+
+       	<h4 class="todo-title">
+       		{{ todo.name }}
+       		<span class="todo-action todo-mark-completed pull-right" ng-click="toggleCompleted(todo)"><i class="fa fa-check"></i></span>
+     			<span class="todo-action todo-delete pull-right" ng-click="deleteTodo(todo)"><i class="fa fa-trash"></i></span>
+       	</h4>
+       	
+      </div>
+    </div>
+
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		
+		<h2>Completed tasks</h2>
+
+		<div class="panel panel-default" ng-repeat="todo in todos | filter:{completed:true}">
+      <div class="panel-body">
+
+   	  	<h4 class="todo-title">
+   	  		{{ todo.name }}
+   	  		<span class="todo-action todo-mark-completed completed pull-right" ng-click="toggleCompleted(todo)"><i class="fa fa-check"></i></span>
+   				<span class="todo-action todo-delete pull-right" ng-click="deleteTodo(todo)"><i class="fa fa-trash"></i></span>
+   	  	</h4>
+
+      </div>
+    </div>
+
+	</div>
+</div>
