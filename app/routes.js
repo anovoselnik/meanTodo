@@ -1,69 +1,15 @@
-var Todo = require('./models/todo');
+var TodoCtrl = require('./controllers/todosController');
 var User = require('./models/user');
 
 module.exports = function(app) {
 
-	app.get('/api/todos', function(req, res) {
+	app.get('/api/todos', TodoCtrl.getTodos)
 
-		Todo.find(function(err, todos) {
+    app.post('/api/todos', TodoCtrl.createTodo);
 
-			if (err)
-				res.send(err);
+    app.put('/api/todos/:todo_id', TodoCtrl.updateTodo);
 
-			res.json(todos);
-
-		});
-
-	});
-
-  app.post('/api/todos', function(req, res) {
-
-    var todo = new Todo();
-    todo.name = req.body.name;
-    todo.created = Date.now();
-
-    todo.save(function(err) {
-      if (err)
-        res.send(err);
-
-      res.json(todo);
-    });
-      
-  });
-
-  app.put('/api/todos/:todo_id', function(req, res) {
-		
-		Todo.findById(req.params.todo_id, function(err, todo) {
-
-      if (err)
-          res.send(err);
-
-      todo.name = req.body.name;
-      todo.completed = req.body.completed;
-
-      todo.save(function(err) {
-        if (err)
-            res.send(err);
-
-        res.json({ message: 'Todo updated!' });
-      });
-
-  	});
-
-	});
-
-	app.delete('/api/todos/:todo_id', function(req, res) {
-		Todo.remove({
-			_id: req.params.todo_id
-		}, 
-		function(err, todo) {
-			if (err)
-			   res.send(err);
-
-			res.json({ message: 'Successfully deleted' });
-		});
-	});
-
+	app.delete('/api/todos/:todo_id', TodoCtrl.deleteTodo);
 
 	// User routes
 

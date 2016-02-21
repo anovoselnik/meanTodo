@@ -18,10 +18,12 @@ exports.createTodo = function(req, res) {
   var todo = new Todo();
   todo.name = req.body.name;
   todo.created = Date.now();
-
+  console.log(todo);
   todo.save(function(err) {
     if (err)
       res.send(err);
+
+    console.log(todo);
 
     res.json(todo);
   });
