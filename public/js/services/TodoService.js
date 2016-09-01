@@ -3,19 +3,19 @@ angular.module('TodoService', [])
 
 	return {
 		get : function() {
-				return $http.get('/api/todos');
+			return $http.get('/api/todos');
 		},
 
 		create : function(todoData) {
-				return $http.post('/api/todos', todoData);
+			return $http.post('/api/todos', todoData);
 		},
 
 		update : function(todoData) {
-				return $http.put('/api/todos/' + todoData._id, todoData);
+			return $http.put('/api/todos/' + todoData._id, todoData);
 		},
 
 		delete : function(id) {
-				return $http.delete('/api/todos/' + id);
+			return $http.delete('/api/todos/' + id);
 		}
 	}       
 
